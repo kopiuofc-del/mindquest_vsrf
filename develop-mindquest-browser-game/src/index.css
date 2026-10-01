@@ -1,0 +1,251 @@
+@import "tailwindcss";
+
+/* ══════════════════ ANIMAÇÕES ══════════════════ */
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flutuar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulsar {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Carta virada (Fase 3) */
+@keyframes virar {
+  from {
+    transform: rotateY(-90deg) scale(0.9);
+    opacity: 0.4;
+  }
+  to {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Par errado (Fase 3) */
+@keyframes tremer {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+/* Par encontrado (Fase 3) */
+@keyframes nuvem {
+  from {
+    transform: translateX(-20px);
+  }
+  to {
+    transform: translateX(40px);
+  }
+}
+
+@keyframes brilhar {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+  }
+  50% {
+    transform: scale(1.07);
+    box-shadow: 0 0 0 10px rgba(52, 211, 153, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+  }
+}
+
+/* ══════════════════ BASE ══════════════════ */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #070b18;
+  color: #e2e8f0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Evita o zoom automático de campos no iOS */
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+/* Área de toque confortável no celular */
+button {
+  touch-action: manipulation;
+  min-height: 40px;
+}
+
+/* Evita que palavras longas estourem a largura da tela */
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+span,
+button {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Rolagem suave dentro da conversa do Mentor */
+[role="log"] {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Telas muito estreitas (abaixo de 360px): reduz levemente a tipografia */
+@media (max-width: 359px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* ══════════════════ POLIMENTO ══════════════════ */
+
+/* Feedback de toque consistente em botões e cartões clicáveis */
+button:active:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+/* Barras de progresso com leve brilho interno */
+[role="progressbar"] > div {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Foco sempre visível, mesmo sobre fundos claros */
+:focus-visible {
+  outline: none;
+}
+
+/* Impede seleção acidental de texto ao tocar rapidamente nos jogos */
+[aria-label^="Carta"],
+[role="progressbar"] {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Barra de rolagem discreta */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.35);
+  color: #fff;
+}
+
+/* ══════════════════ PREFERÊNCIA: ANIMAÇÕES DESATIVADAS ══════════════════ */
+
+body.sem-animacoes *,
+body.sem-animacoes *::before,
+body.sem-animacoes *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ══════════════════ PREFERÊNCIA: ALTO CONTRASTE ══════════════════ */
+
+body.alto-contraste {
+  background: #000;
+  color: #fff;
+}
+
+body.alto-contraste .text-slate-400,
+body.alto-contraste .text-slate-500,
+body.alto-contraste .text-slate-600 {
+  color: #e2e8f0 !important;
+}
+
+body.alto-contraste .text-slate-300,
+body.alto-contraste .text-slate-200 {
+  color: #fff !important;
+}
+
+body.alto-contraste .border-white\/10,
+body.alto-contraste .border-white\/5 {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+body.alto-contraste .bg-slate-900\/60,
+body.alto-contraste .bg-slate-950\/85 {
+  background-color: rgba(0, 0, 0, 0.92) !important;
+}
+
+/* ══════════════════ ACESSIBILIDADE DO SISTEMA ══════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
